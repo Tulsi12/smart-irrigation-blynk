@@ -1,6 +1,6 @@
-#define BLYNK_TEMPLATE_ID "TMPLkX_dq0cj"
-#define BLYNK_DEVICE_NAME "smart irrigation"
-#define BLYNK_AUTH_TOKEN "NIbQIU0O5l0K7o0J6TZHzb4Idr6Scgkz"
+#define BLYNK_TEMPLATE_ID "TMPL8LWnEg-O"
+#define BLYNK_DEVICE_NAME "smartfarming"
+#define BLYNK_AUTH_TOKEN "M_UfEtwYY-Nskde-FZkuwFYmHLusC9pj"
 
 #define BLYNK_PRINT Serial
 #include <ESP8266WiFi.h>
@@ -57,7 +57,9 @@ void sendSensor()
 }
 void setup()
 {
+  pinMode(D0, OUTPUT);
   pinMode(D5, OUTPUT);
+  
   Serial.begin(115200);
   Blynk.begin(auth, ssid, pass);
   dht.begin();
@@ -77,14 +79,14 @@ void loop()
     Serial.println("water your plant");
     Serial.print(outputvalue);
     Blynk.notify("water your plant");
-    Blynk.logEvent("soil");
+    Blynk.logEvent("notice");
     delay(100);
   }
   else if (outputvalue < 45)
   {
     Serial.println("soil is wet enough to water");
     Serial.print(outputvalue);
-    Blynk.logEvent("soil","soil is wet enough to water");// notification
+    Blynk.logEvent("notice","soil is wet enough to water");// notification
     Blynk.notify("soil is wet enough to water");
     delay(100);
   }
